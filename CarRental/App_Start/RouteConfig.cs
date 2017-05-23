@@ -13,6 +13,13 @@ namespace CarRental
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapMvcAttributeRoutes();
+
+            //routes.MapRoute(
+            //    name: "TestConventional",
+            //    url: "cars/byyear/{year}",
+            //    defaults: new { controller = "Cars", action = "ByYear" });
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
