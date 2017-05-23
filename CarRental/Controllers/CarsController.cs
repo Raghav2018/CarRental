@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using CarRental.Models;
 using CarRental.ViewModels;
 using System.Data.Entity;
+using CarRental.Migrations;
 
 namespace CarRental.Controllers
 {
@@ -28,6 +29,7 @@ namespace CarRental.Controllers
             var carTypes = _context.carTypes.ToList();
             var viewModel = new CarFormViewModel()
             {
+                car = new Caar(),
                 carTypes = carTypes
             };
             return View("CarForm", viewModel);
@@ -36,18 +38,29 @@ namespace CarRental.Controllers
         [HttpPost]
         public ActionResult Save(Caar car)
         {
+            if (!ModelState.IsValid)
+            {
+                var viewModel = new CarFormViewModel
+                {
+                    car = car,
+                    carTypes = _context.carTypes.ToList()
+                };
+
+                return View("CarForm", viewModel);
+            }
+
             if (car.Id == 0)
             {
                 _context.Cars.Add(car);
             }
-            else
-            {
-                var carinDb = _context.Cars.Single(c => c.Id == car.Id);
-                carinDb.Name = car.Name;
-                carinDb.year = car.year;
-                carinDb.carTypeId = car.carTypeId;
-                carinDb.stock = car.stock;
-            }
+            //else
+            //{
+            //    var carinDb = _context.Cars.Single(c => c.Id == car.Id);
+            //    carinDb.Name = car.Name;
+            //    carinDb.year = car.year;
+            //    carinDb.carTypeId = car.carTypeId;
+            //    carinDb.stock = car.stock;
+            //}
             _context.SaveChanges();
             return RedirectToAction("Index", "Cars");
 

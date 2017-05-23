@@ -28,14 +28,27 @@ namespace CarRental.Controllers
             var memberhipTypes = _context.MembershipTypes.ToList();
             var viewModel = new CustomerFormViewModel()
             {
+                customer = new Customer(),
                 MembershipTypes = memberhipTypes
             };
             return View("CustomerForm", viewModel);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Save(Customer customer)
         {
+            if(!ModelState.IsValid)
+            {
+                var viewModel = new CustomerFormViewModel
+                {
+                    customer = customer,
+                    MembershipTypes = _context.MembershipTypes.ToList()
+                };
+
+                return View("CustomerForm", viewModel);
+            }
+
             if(customer.Id == 0)
             {
                 _context.Customers.Add(customer);
@@ -50,7 +63,6 @@ namespace CarRental.Controllers
             }
             _context.SaveChanges();
             return RedirectToAction("Index", "Customers");
-
         }
 
         // GET: Customers

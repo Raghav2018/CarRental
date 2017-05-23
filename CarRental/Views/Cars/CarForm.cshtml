@@ -19,22 +19,32 @@ else
     <div class="form-group">
         @Html.LabelFor(m => m.car.Name)
         @Html.TextBoxFor(m => m.car.Name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m=>m.car.Name)
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.car.year)
         @Html.TextBoxFor(m => m.car.year, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m=>m.car.year)
     </div>
 
     <div class="form-group">
         @Html.LabelFor(m => m.car.carTypeId)
         @Html.DropDownListFor(m => m.car.carTypeId, new SelectList(Model.carTypes, "Id", "Name"), "Select Car Type", new { @class = "form-control" })
+        @Html.ValidationMessageFor(m=>m.car.carTypeId)
     </div>
 
     <div class="form-group">
         @Html.LabelFor(m => m.car.stock)
         @Html.TextBoxFor(m => m.car.stock, new { @class = "form-control" })
+        @Html.ValidationMessageFor(m=>m.car.stock)
     </div>
 
     @Html.HiddenFor(m => m.car.Id)
+    @Html.AntiForgeryToken()
     <button type="submit" class="btn btn-primary">Save</button>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/jqueryval")
 }

@@ -8,7 +8,8 @@ namespace CarRental.ViewModels
 {
     public class CarFormViewModel
     {
-        public Caar car { get; set; }
         public IEnumerable<CarRental.Models.carType> carTypes { get; set; }
+        public Caar car { get; set; }
+
     }
 }

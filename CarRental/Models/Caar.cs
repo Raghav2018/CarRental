@@ -9,14 +9,24 @@ namespace CarRental.Models
     public class Caar
     {
         public int Id { get; set; }
-        public string Name { get; set; }
-        [Display(Name ="Model Year")]
-        public int year { get; set; }
-        public carType carType { get; set; }
+
         [Required]
+        [StringLength(255)]
+        public string Name { get; set; }
+
+        [Display(Name ="Model Year")]
+        [Required]
+        [MinMaxCarAge]
+        public int? year { get; set; }
+
+        [Required]
+        [Range(0, 20)]
         [Display(Name = "Number of stock")]
-        public int stock { set; get; }
-        [Display(Name ="Car Type")]
+        public int? stock { set; get; }
+
+        public carType carType { get; set; }       
+
+        [Display(Name ="Type of Car")]
         public int carTypeId { get; set; }
     }
 }
