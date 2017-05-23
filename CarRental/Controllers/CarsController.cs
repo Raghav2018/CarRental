@@ -5,31 +5,37 @@ using System.Web;
 using System.Web.Mvc;
 using CarRental.Models;
 using CarRental.ViewModels;
+using System.Data.Entity;
 
 namespace CarRental.Controllers
 {
     public class CarsController : Controller
     {
+        private ApplicationDbContext _context;
+
+        public CarsController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
         // GET: Cars/Random 
         public ViewResult Index()
         {
-            var cars = GetCars();
+            var cars = _context.Cars.Include(c =>c.Type).ToList();
             return View(cars);
         }
 
-        [Route("cars/byyear/{year}")]
-        public ActionResult ByYear(int year)
+        public ActionResult Details(int id)
         {
-            return Content(GetCars().SingleOrDefault(c => c.year == year).Name);
-        }
+            var cars = _context.Cars.Include(c => c.Type).SingleOrDefault(c => c.Id == id);
+            if (cars == null)
+                return HttpNotFound();
 
-        public IEnumerable<Car> GetCars()
-        {
-            return new List<Car>
-            {
-                new Car {Id=1, Name="Mustang", year = 2014 },
-                new Car {Id =2, Name ="Camero", year=2013 }
-            };
+            return View(cars);
         }
 
     }
