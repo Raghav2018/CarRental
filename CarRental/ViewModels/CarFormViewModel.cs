@@ -6,9 +6,9 @@ using CarRental.Models;
 
 namespace CarRental.ViewModels
 {
-    public class RandomCarViewModel
+    public class CarFormViewModel
     {
         public Caar car { get; set; }
-        public List<Customer> customers { get; set; }
+        public IEnumerable<CarRental.Models.carType> carTypes { get; set; }
     }
 }

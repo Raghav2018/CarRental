@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using CarRental.Models;
 using System.Data.Entity;
+using CarRental.ViewModels;
 
 namespace CarRental.Controllers
 {
@@ -21,6 +22,37 @@ namespace CarRental.Controllers
         {
             _context.Dispose();
         }
+
+        public ActionResult New()
+        {
+            var memberhipTypes = _context.MembershipTypes.ToList();
+            var viewModel = new CustomerFormViewModel()
+            {
+                MembershipTypes = memberhipTypes
+            };
+            return View("CustomerForm", viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult Save(Customer customer)
+        {
+            if(customer.Id == 0)
+            {
+                _context.Customers.Add(customer);
+            }
+            else
+            {
+                var customerinDb = _context.Customers.Single(c => c.Id == customer.Id);
+                customerinDb.Name = customer.Name;
+                customerinDb.Birthdate = customer.Birthdate;
+                customerinDb.MembershipTypeId = customer.MembershipTypeId;
+                customer.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
+            }
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Customers");
+
+        }
+
         // GET: Customers
         public ViewResult Index()
         {
@@ -35,6 +67,21 @@ namespace CarRental.Controllers
                 return HttpNotFound();
 
             return View(customer);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+
+            if (customer == null)
+                return HttpNotFound();
+
+            var viewModel = new CustomerFormViewModel()
+            {
+                customer = customer,
+                MembershipTypes = _context.MembershipTypes.ToList()
+            };
+            return View("CustomerForm", viewModel);
         }
     }
 }

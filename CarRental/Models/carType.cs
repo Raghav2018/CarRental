@@ -6,10 +6,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CarRental.Models
 {
-    public class Type
+    public class carType
     {
         public int Id { get; set; }
         [Required]
-        public string carType { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<CarRental.Models.Customer>
+
 @{
     ViewBag.Title = "Customers";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -7,7 +8,9 @@
 <h2>
     Customers
 </h2>
-
+<hr>
+@Html.ActionLink("Add New Customer","New", new { }, new { @class = "btn btn-primary" })
+<hr>
 @if (!Model.Any())
 {
     <p>We dont have any customers yet</p>
@@ -25,7 +28,7 @@ else
             @foreach (var customer in Model)
             {
                 <tr>
-                    <td>@Html.ActionLink(customer.Name, "Details", "Customers", new { id = customer.Id }, null)</td>
+                    <td>@Html.ActionLink(customer.Name, "Edit", "Customers", new { id = customer.Id }, null)</td>
                     <td>@customer.MembershipType.Name</td>
                 </tr>
             }

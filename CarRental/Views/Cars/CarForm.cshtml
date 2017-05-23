@@ -1,0 +1,40 @@
+﻿@model CarRental.ViewModels.CarFormViewModel
+
+@{
+    ViewBag.Title = "CarForm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (@Model.car == null)
+{
+    <h2>Add new car</h2>
+}
+else
+{
+    <h2>Update car - @Model.car.Name</h2>
+}
+<hr>
+@using (Html.BeginForm("Save", "Cars"))
+{
+    <div class="form-group">
+        @Html.LabelFor(m => m.car.Name)
+        @Html.TextBoxFor(m => m.car.Name, new { @class = "form-control" })
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.car.year)
+        @Html.TextBoxFor(m => m.car.year, new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.car.carTypeId)
+        @Html.DropDownListFor(m => m.car.carTypeId, new SelectList(Model.carTypes, "Id", "Name"), "Select Car Type", new { @class = "form-control" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.car.stock)
+        @Html.TextBoxFor(m => m.car.stock, new { @class = "form-control" })
+    </div>
+
+    @Html.HiddenFor(m => m.car.Id)
+    <button type="submit" class="btn btn-primary">Save</button>
+}

@@ -21,7 +21,9 @@ namespace CarRental.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public DbSet<Customer> Customers { get; set; }
-        public DbSet<Car> Cars { get; set; }
+        public DbSet<Caar> Cars { get; set; }
+        public DbSet<MembershipType> MembershipTypes { get; set; }
+        public DbSet<carType> carTypes { set; get; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

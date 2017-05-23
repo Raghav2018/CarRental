@@ -175,64 +175,22 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201705230445347_InitialModel.cs" />
-    <Compile Include="Migrations\201705230445347_InitialModel.Designer.cs">
-      <DependentUpon>201705230445347_InitialModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705230457506_AddIsSubsToCust.cs" />
-    <Compile Include="Migrations\201705230457506_AddIsSubsToCust.Designer.cs">
-      <DependentUpon>201705230457506_AddIsSubsToCust.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705230503070_AddMembershipType.cs" />
-    <Compile Include="Migrations\201705230503070_AddMembershipType.Designer.cs">
-      <DependentUpon>201705230503070_AddMembershipType.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705230508034_PopulateMembershipTypes.cs" />
-    <Compile Include="Migrations\201705230508034_PopulateMembershipTypes.Designer.cs">
-      <DependentUpon>201705230508034_PopulateMembershipTypes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705230518102_ApplyAnnotationToCustomerName.cs" />
-    <Compile Include="Migrations\201705230518102_ApplyAnnotationToCustomerName.Designer.cs">
-      <DependentUpon>201705230518102_ApplyAnnotationToCustomerName.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705230541226_AddNameToMembershipType.cs" />
-    <Compile Include="Migrations\201705230541226_AddNameToMembershipType.Designer.cs">
-      <DependentUpon>201705230541226_AddNameToMembershipType.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705230542121_addnamevaluestoMembershipType.cs" />
-    <Compile Include="Migrations\201705230542121_addnamevaluestoMembershipType.Designer.cs">
-      <DependentUpon>201705230542121_addnamevaluestoMembershipType.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705230550203_addBirthdatetoCustomer.cs" />
-    <Compile Include="Migrations\201705230550203_addBirthdatetoCustomer.Designer.cs">
-      <DependentUpon>201705230550203_addBirthdatetoCustomer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705230554250_addBirthdatetoCustomer1.cs" />
-    <Compile Include="Migrations\201705230554250_addBirthdatetoCustomer1.Designer.cs">
-      <DependentUpon>201705230554250_addBirthdatetoCustomer1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705230616555_addtypetocars.cs" />
-    <Compile Include="Migrations\201705230616555_addtypetocars.Designer.cs">
-      <DependentUpon>201705230616555_addtypetocars.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705230618517_addtypetocars1.cs" />
-    <Compile Include="Migrations\201705230618517_addtypetocars1.Designer.cs">
-      <DependentUpon>201705230618517_addtypetocars1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201705230619132_updatecartypes.cs" />
-    <Compile Include="Migrations\201705230619132_updatecartypes.Designer.cs">
-      <DependentUpon>201705230619132_updatecartypes.cs</DependentUpon>
+    <Compile Include="Migrations\201705231956065_Initial.cs" />
+    <Compile Include="Migrations\201705231956065_Initial.Designer.cs">
+      <DependentUpon>201705231956065_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Car.cs" />
+    <Compile Include="Models\Caar.cs" />
     <Compile Include="Models\Customer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\MembershipType.cs" />
-    <Compile Include="Models\Type.cs" />
+    <Compile Include="Models\carType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CarFormViewModel.cs" />
+    <Compile Include="ViewModels\CustomerFormViewModel.cs" />
     <Compile Include="ViewModels\RandomCarViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -296,6 +254,8 @@
     <Content Include="Views\Customers\Details.cshtml" />
     <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Cars\Details.cshtml" />
+    <Content Include="Views\Customers\CustomerForm.cshtml" />
+    <Content Include="Views\Cars\CarForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -309,41 +269,8 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201705230445347_InitialModel.resx">
-      <DependentUpon>201705230445347_InitialModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705230457506_AddIsSubsToCust.resx">
-      <DependentUpon>201705230457506_AddIsSubsToCust.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705230503070_AddMembershipType.resx">
-      <DependentUpon>201705230503070_AddMembershipType.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705230508034_PopulateMembershipTypes.resx">
-      <DependentUpon>201705230508034_PopulateMembershipTypes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705230518102_ApplyAnnotationToCustomerName.resx">
-      <DependentUpon>201705230518102_ApplyAnnotationToCustomerName.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705230541226_AddNameToMembershipType.resx">
-      <DependentUpon>201705230541226_AddNameToMembershipType.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705230542121_addnamevaluestoMembershipType.resx">
-      <DependentUpon>201705230542121_addnamevaluestoMembershipType.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705230550203_addBirthdatetoCustomer.resx">
-      <DependentUpon>201705230550203_addBirthdatetoCustomer.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705230554250_addBirthdatetoCustomer1.resx">
-      <DependentUpon>201705230554250_addBirthdatetoCustomer1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705230616555_addtypetocars.resx">
-      <DependentUpon>201705230616555_addtypetocars.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705230618517_addtypetocars1.resx">
-      <DependentUpon>201705230618517_addtypetocars1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201705230619132_updatecartypes.resx">
-      <DependentUpon>201705230619132_updatecartypes.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201705231956065_Initial.resx">
+      <DependentUpon>201705231956065_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

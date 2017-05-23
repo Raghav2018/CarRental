@@ -6,14 +6,17 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CarRental.Models
 {
-    public class Car
+    public class Caar
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        [Display(Name ="Model Year")]
         public int year { get; set; }
-        public Type Type { get; set; }
+        public carType carType { get; set; }
         [Required]
+        [Display(Name = "Number of stock")]
         public int stock { set; get; }
-        public int TypeId { get; set; }
+        [Display(Name ="Car Type")]
+        public int carTypeId { get; set; }
     }
 }
