@@ -15,6 +15,8 @@ namespace CarRental.App_Start
             // Domain to Dto
             Mapper.CreateMap<Customer, CustomerDto>();
             Mapper.CreateMap<Caar, CarDto>();
+            Mapper.CreateMap<MembershipType, MembershipTypeDto>();
+            Mapper.CreateMap<carType, CarTypeDto>();
 
             // Dto to Domain
             Mapper.CreateMap<CustomerDto, Customer>()

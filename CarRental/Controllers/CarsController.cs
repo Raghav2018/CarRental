@@ -24,6 +24,16 @@ namespace CarRental.Controllers
             _context.Dispose();
         }
 
+        // GET: Cars/Random 
+        public ViewResult Index()
+        {
+            if (User.IsInRole(RoleName.CanManageCars))
+                return View("List");
+
+            return View("ReadOnlyList");
+        }
+
+        [Authorize(Roles = RoleName.CanManageCars)]
         public ActionResult New()
         {
             var carTypes = _context.carTypes.ToList();
@@ -35,7 +45,34 @@ namespace CarRental.Controllers
             return View("CarForm", viewModel);
         }
 
+        [Authorize(Roles = RoleName.CanManageCars)]
+        public ActionResult Edit(int id)
+        {
+            var car = _context.Cars.SingleOrDefault(c => c.Id == id);
+
+            if (car == null)
+                return HttpNotFound();
+
+            var viewModel = new CarFormViewModel()
+            {
+                car = car,
+                carTypes = _context.carTypes.ToList()
+            };
+            return View("CarForm", viewModel);
+        }
+
+        public ActionResult Details(int id)
+        {
+            var cars = _context.Cars.Include(c => c.carType).SingleOrDefault(c => c.Id == id);
+            if (cars == null)
+                return HttpNotFound();
+
+            return View(cars);
+        }
+
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = RoleName.CanManageCars)]
         public ActionResult Save(Caar car)
         {
             if (!ModelState.IsValid)
@@ -63,38 +100,6 @@ namespace CarRental.Controllers
             //}
             _context.SaveChanges();
             return RedirectToAction("Index", "Cars");
-
-        }
-
-        // GET: Cars/Random 
-        public ViewResult Index()
-        {
-            var cars = _context.Cars.Include(c =>c.carType).ToList();
-            return View(cars);
-        }
-
-        public ActionResult Details(int id)
-        {
-            var cars = _context.Cars.Include(c => c.carType).SingleOrDefault(c => c.Id == id);
-            if (cars == null)
-                return HttpNotFound();
-
-            return View(cars);
-        }
-
-        public ActionResult Edit(int id)
-        {
-            var car = _context.Cars.SingleOrDefault(c => c.Id == id);
-
-            if (car == null)
-                return HttpNotFound();
-
-            var viewModel = new CarFormViewModel()
-            {
-                car = car,
-                carTypes = _context.carTypes.ToList()
-            };
-            return View("CarForm", viewModel);
         }
     }
 }

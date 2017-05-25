@@ -22,7 +22,9 @@ namespace CarRental.Models
         [Required]
         [Range(0, 20)]
         [Display(Name = "Number of stock")]
-        public int? stock { set; get; }
+        public int stock { set; get; }
+
+        public int NumberAvailable { set; get; }
 
         public carType carType { get; set; }       
 

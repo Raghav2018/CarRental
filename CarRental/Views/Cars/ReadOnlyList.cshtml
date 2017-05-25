@@ -1,0 +1,42 @@
+﻿@model IEnumerable<CarRental.Models.Caar>
+
+@{
+    ViewBag.Title = "Cars";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2> Cars</h2>
+    <table id="Cars" class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Car</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            var table = $("#Cars").DataTable({
+                ajax: {
+                    url: "/api/cars",
+                    dataSrc: ""
+                },
+                columns: [{
+                    data: "name",
+                    },
+                    {
+                        data: "carType.name"
+                    }
+                ]
+            });
+        });
+    </script>
+}
+
+
+

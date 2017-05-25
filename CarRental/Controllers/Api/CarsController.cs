@@ -8,6 +8,7 @@ using CarRental.Models;
 using CarRental.Dtos;
 using CarRental.Controllers;
 using AutoMapper;
+using System.Data.Entity;
 
 namespace CarRental.Controllers.Api
 {
@@ -20,9 +21,18 @@ namespace CarRental.Controllers.Api
             _context = new ApplicationDbContext();
         }
         //GET /api/cars
-        public IHttpActionResult GetCars()
+        public IHttpActionResult GetCars(string query=null)
         {
-            var carDto = _context.Cars.ToList().Select(Mapper.Map<Caar, CarDto>);
+            var carsQuery = _context.Cars
+                .Include(c => c.carType)
+                .Where(m => m.NumberAvailable > 0);
+
+            if (!String.IsNullOrWhiteSpace(query))
+                carsQuery = carsQuery.Where(c => c.Name.Contains(query));
+
+            var carDto = carsQuery
+                .ToList()         
+                .Select(Mapper.Map<Caar, CarDto>);
             return Ok(carDto);
         }
 
@@ -36,8 +46,9 @@ namespace CarRental.Controllers.Api
             return Ok(Mapper.Map<Caar, CarDto>(car));
         }
 
-        //POST /api/cars 
+        //POST /api/cars
         [HttpPost]
+        [Authorize(Roles = RoleName.CanManageCars)]
         public IHttpActionResult CreateCar(CarDto carDto)
         {
             if (!ModelState.IsValid)
@@ -53,6 +64,7 @@ namespace CarRental.Controllers.Api
 
         //PUT /api/cars/1
         [HttpPut]
+        [Authorize(Roles = RoleName.CanManageCars)]
         public IHttpActionResult updateCar(int id, CarDto carDto)
         {
             if (!ModelState.IsValid)
@@ -72,6 +84,7 @@ namespace CarRental.Controllers.Api
 
         // DELETE /api/cars/1
         [HttpDelete]
+        [Authorize(Roles = RoleName.CanManageCars)]
         public IHttpActionResult DeleteCar(int id)
         {
             var carInDb = _context.Cars.SingleOrDefault(c => c.Id == id);

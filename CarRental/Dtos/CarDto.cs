@@ -20,10 +20,12 @@ namespace CarRental.Dtos
         public int year { get; set; }
 
         [Required]
-        [Range(0, 20)]
-        public int stock { set; get; }
+        public int carTypeId { get; set; }
+
+        public CarTypeDto carType { get; set; }
 
         [Required]
-        public int carTypeId { get; set; }
+        [Range(0, 20)]
+        public int stock { set; get; }
     }
 }
