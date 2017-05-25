@@ -55,13 +55,13 @@ namespace CarRental
             //   consumerSecret: "");
 
             //app.UseFacebookAuthentication(
-            //   appId: "443505029356119",
-            //   appSecret: "943ed09086cb3091fc09cd68dde4a8b0");
+            //   appId: "",
+            //   appSecret: "");
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "260773937329-016k0rf97pue5qc7c93mnjp1k0vaor29.apps.googleusercontent.com",
-                ClientSecret = "8lA4j8x73buY3aXIHksGCeDW"
+                ClientId = "dummy.apps.googleusercontent.com",
+                ClientSecret = "dummy"
             });
         }
     }
